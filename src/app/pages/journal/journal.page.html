@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+
+    
+
+    <ion-buttons slot="end"  *ngIf="journal && journal.userId === currentUserId">
+      <ion-button (click)="updateJournal()">
+        <ion-icon color="secondary" size="large" slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteJournal()">
+        <ion-icon color="danger" size="large" slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+    <ion-buttons slot="end">
+
+      <ion-button  fill="clear" *ngIf="!isFavJournal(journal)" (click)="toggleFavorite(journal)">
+        <ion-icon name="star-outline" size="large"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="clear" *ngIf="isFavJournal(journal)" (click)="removeFavorite(journal)">
+        <ion-icon name="star" size="large" style="color: #FFD700;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">journal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="journal">
+    
+    <ng-container *ngIf="journal.userId === currentUserId; else viewTitle">
+      <!-- Ako je korisnik vlasnik, prikazuje se ion-input -->
+      <ion-input class="title" label="Title" [(ngModel)]="journal.title" slot="center"></ion-input>
+    </ng-container>
+
+    <!-- Ako nije vlasnik, prikazuje se title -->
+    <ng-template #viewTitle>
+      <ion-title class="title" slot="center">{{ journal.title }}</ion-title>
+    </ng-template>
+
+    <ng-container *ngIf="journal.userId === currentUserId; else viewContent">
+      <!-- Ako je korisnik vlasnik, prikazuje se ion-input -->
+      <ion-textarea class="text-content" lines="none" [(ngModel)]="journal.content"></ion-textarea>
+    </ng-container>
+    
+    <ng-template #viewContent>
+      <div class="text">{{ journal.content }}</div>
+    </ng-template>
+    
+    
+  </div>
+</ion-content>
