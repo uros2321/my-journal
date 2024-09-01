@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
   {
-    path: 'journals/:id',
+    path: 'journals',
     loadChildren: () => import('./pages/journals/journals.module').then( m => m.JournalsPageModule)
   },
   {
