@@ -35,7 +35,10 @@ const routes: Routes = [
     path: 'journal/:id',
     loadChildren: () => import('./pages/journal/journal.module').then( m => m.JournalPageModule)
   },
-
+  {
+    path: 'my-profile',
+    loadChildren: () => import('./pages/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+  },
 ];
 
 @NgModule({

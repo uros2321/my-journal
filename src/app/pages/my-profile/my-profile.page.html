@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-buttons slot="start">
+
+    <ion-button (click)="goBack()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+
+  </ion-buttons>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+<ion-item>
+  <ion-title class="title">My Journals</ion-title>
+</ion-item>
+  <ion-item>
+    <ion-grid>
+    <ion-row>
+      <ion-col class="center-col">
+        <ion-buttons>
+          <ion-button class="text-center" expand="full" (click)="goToFavorites()">
+          Favorites
+        </ion-button>
+        </ion-buttons>
+        
+      </ion-col>
+      <ion-col class="center-col">
+        <ion-buttons>
+          <ion-button class="text-center" expand="full" (click)="goToMyJournals()">
+          My Journals
+        </ion-button>
+        </ion-buttons>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-item>
+  
+  
+  <ion-grid *ngIf="favorite">
+    <ion-row>
+      <ion-col sizeLg = "4" sizeMd="4"  size="6" *ngFor="let journal of favJournals" (click)="openJournal(journal)">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="title">{{journal.title}}</ion-card-title>
+
+            
+
+          </ion-card-header>
+        <ion-card-content>
+          
+            {{journal.content}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="!favorite">
+    <ion-row>
+      <ion-col sizeLg = "4" sizeMd="4"  size="6" *ngFor="let journal of createdJournals" (click)="openJournal(journal)">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="title">{{journal.title}}</ion-card-title>
+
+            
+
+          </ion-card-header>
+        <ion-card-content>
+          
+            {{journal.content}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
